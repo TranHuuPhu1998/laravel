@@ -9,3 +9,25 @@ php artisan make:migration answer --create=answer
 
 3# Running Migrations
 php artisan migrate
+
+
+$ php artisan make:controller Country\CountryController
+
+$ php artisan make:controller Country\QuestionController --resource
+
+$ php artisan make:model Mode
+
+$ php artisan serve
+
+$ php artisan migrate
+
+$ php artisan make:resource QuestionResource
+
+Rollback all migrations and run them all again
+
+
+php artisan migrate:refresh
+
+php artisan migrate:refresh --seed
+
+php artisan migrate:reset

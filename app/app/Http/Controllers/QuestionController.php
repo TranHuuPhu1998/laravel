@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Resources\QuestionResource;
 use App\Questions;
+use App\Answer;
 
 class QuestionController extends Controller
 {
@@ -14,6 +15,15 @@ class QuestionController extends Controller
      */
     public function index()
     {
+        return new QuestionResource(Questions::all());
+    }
+
+    public function storeQuestionsAnswer(Request $request)
+    {
+        $question = Questions::all();
+        $answer = Answer::all()->pluck('answers_id');
+        // $question->map(()->)
+        $question->push($answer);    
         return new QuestionResource(Questions::all());
     }
 
@@ -37,25 +47,22 @@ class QuestionController extends Controller
     {
         
         $this->validate($request,[
-            'answers_id' => 'required|integer',
             'question' => 'required|string',
             'category' => 'required|string',
         ],[
-            'answers_id.required'=> 'Entering the answers_id is required.',
             'question.required'=> 'Entering the question is required.',
             'category.required'=> 'Entering the category is required.',
 
-            'answers_id.integer'=> 'Entering the answers_id is integer.',
             'question.integer'=> 'Entering the question is string.',
             'category.integer'=> 'Entering the category is string.',
         ]);
         $question = new Questions([
-            "answers_id"=> $request->get('answers_id'),
             "question"=> $request->get('question'),
             "category"=> $request->get('category'),
             "updated_at" => $request->get('updated_at'),
             "created_at" => $request->get('created_at')
         ]);
+      
         $result = $question->save();
         if($result){
             return new QuestionResource($question);
@@ -99,8 +106,7 @@ class QuestionController extends Controller
     public function update(Request $request, $id)
     {
         $question = Questions::find($id);
-        $question->answers_id = $request->id;
-        $question->answers_id = $request->answers_id;
+
         $question->question = $request->question;
         $question->category = $request->category;
 

@@ -70,3 +70,17 @@ $ php artisan serve
 $ php artisan migrate
 
 $ php artisan make:resource QuestionResource
+
+phu-th@if-vietnam.com
+wwwwwwwwwwwwwwwwwww
+
+php artisan migrate:refresh
+
+php artisan passport:install
+php artisan config:cache
+php artisan cache:clear
+Client ID: 1
+Client secret: 6brhPNeELZtyI1a9kYwR6ZLVlxLTGnMpkBtTmuYy
+Password grant client created successfully.
+Client ID: 2
+Client secret: pn9gL6E6P3gBj8fFqm2svD5BfwCdsIshdueKMeTg

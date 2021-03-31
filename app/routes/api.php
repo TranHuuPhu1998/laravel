@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\TaskController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -40,5 +41,8 @@ Route::group([
     Route::delete('/questions/delete/{id}' ,[QuestionController::class , 'delete']);
     Route::put('/questions/update/{id}' ,[QuestionController::class , 'update']);
 
-// route answer
+// route taks
+
+    Route::get('tasks' , [TaskController::class , 'index']);
+
 

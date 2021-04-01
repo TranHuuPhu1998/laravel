@@ -31,9 +31,9 @@ Route::group([
 });
 // route question 
 
-    Route::post('reset-password', 'ResetPasswordController@sendMail');
-    Route::put('reset-password/{token}', 'ResetPasswordController@reset');
-    Route::get('/users' , [AuthController::class,'getUsers']);
+    Route::post('/reset-password', 'ResetPasswordController@sendMail');
+    Route::put('/reset-password/{token}', 'ResetPasswordController@reset');
+   
     Route::get('/questions' ,[QuestionController::class , 'index']);
     Route::get('/ques-ans' ,[QuestionController::class , 'storeQuestionsAnswer']);
     Route::get('/questions/{id}', [QuestionController::class , 'edit']);
@@ -42,7 +42,9 @@ Route::group([
     Route::put('/questions/update/{id}' ,[QuestionController::class , 'update']);
 
 // route taks
-
     Route::get('tasks' , [TaskController::class , 'index']);
-
-
+// route users
+    Route::get('/users' , [AuthController::class,'getUsers']);
+    Route::delete('/users/delete/{id}' , [AuthController::class , 'deleteUser']);
+    Route::post('/users/create' , [AuthController::class , 'createUser']);
+    Route::put('/users/update/{id}' , [AuthController::class , 'updateUser']);

@@ -19,8 +19,6 @@ class Questions extends Migration
             $table->string('category')->default('');  
             $table->timestamp('created')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
-
-     
             $table->engine = 'InnoDB';
         });
         DB::connection('mysql')->table('questions')->insert([
@@ -170,8 +168,8 @@ class Questions extends Migration
      */
     public function down()
     {
-         Schema::dropIfExists('questions');
         Schema::dropIfExists('answer');
+        Schema::dropIfExists('questions');
         Schema::dropIfExists('list_lesson');
         Schema::dropIfExists('category');
     }

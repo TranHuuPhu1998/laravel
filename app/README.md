@@ -79,16 +79,3 @@ php artisan migrate:refresh
 php artisan passport:install
 php artisan config:cache
 php artisan cache:clear
-
-Client ID: 1
-Client secret: 6brhPNeELZtyI1a9kYwR6ZLVlxLTGnMpkBtTmuYy
-Password grant client created successfully.
-Client ID: 2
-Client secret: pn9gL6E6P3gBj8fFqm2svD5BfwCdsIshdueKMeTg
-
-
-Client ID: 1
-Client secret: UVUluUAbevYubdx5WSEZegp9j5vpTWjbZ0Km8QaV
-Password grant client created successfully.
-Client ID: 2
-Client secret: qYiPcPnV1Rqs4ipxjNOYXWKnBCavxRUgarxqWsoO

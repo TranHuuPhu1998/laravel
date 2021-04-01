@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\PasswordReset;
 use App\Notifications\ResetPasswordRequest;
+use Illuminate\Auth\Notifications\ResetPassword;
 use App\User;
 
 class ResetPasswordController extends Controller
@@ -23,14 +24,20 @@ class ResetPasswordController extends Controller
     public function sendMail(Request $request)
     {
         $user = User::where('email', $request->email)->firstOrFail();
+
         $passwordReset = PasswordReset::updateOrCreate([
             'email' => $user->email,
         ], [
             'token' => Str::random(60),
         ]);
 
+        $url = ResetPassword::createUrlUsing(function ($user, string $token) {
+            return 'http://localhost:3000/reset-password/'.$token;
+        });
+
+       
         if ($passwordReset) {
-            $user->notify(new ResetPasswordRequest($passwordReset->token));
+            $user->notify(new ResetPasswordRequest($url));
         }
   
         return response()->json([

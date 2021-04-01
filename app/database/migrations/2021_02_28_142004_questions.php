@@ -15,6 +15,7 @@ class Questions extends Migration
     {
         Schema::connection('mysql')->create('questions', function (Blueprint $table) {
             $table->increments('id', true)->unsigned();
+            // $table->id();
             $table->string('question')->default('');
             $table->string('category')->default('');  
             $table->timestamp('created')->useCurrent();
@@ -140,8 +141,6 @@ class Questions extends Migration
                 "description"=>"description6"
             ]
         ]);
-        
-
         Schema::connection('mysql')-> create('category', function (Blueprint $table) {
             $table->increments('id', true)->unsigned();
             $table->string('name')->default('');

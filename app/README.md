@@ -59,11 +59,11 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-$ php artisan make:controller Country\CountryController
+$ php artisan make:controller Country/CountryController
 
-$ php artisan make:controller Country\QuestionController --resource
+$ php artisan make:controller Country/QuestionController --resource
 
-$ php artisan make:model Mode
+$ php artisan make:model Models/admin
 
 $ php artisan serve
 

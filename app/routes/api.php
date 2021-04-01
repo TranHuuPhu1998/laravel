@@ -31,8 +31,8 @@ Route::group([
 });
 // route question 
 
-    Route::post('/reset-password', 'ResetPasswordController@sendMail');
-    Route::put('/reset-password/{token}', 'ResetPasswordController@reset');
+    Route::post('reset-password', 'ResetPasswordController@sendMail');
+    Route::put('reset-password/{token}', 'ResetPasswordController@reset');
    
     Route::get('/questions' ,[QuestionController::class , 'index']);
     Route::get('/ques-ans' ,[QuestionController::class , 'storeQuestionsAnswer']);

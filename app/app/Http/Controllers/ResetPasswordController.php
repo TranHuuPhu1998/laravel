@@ -20,7 +20,7 @@ class ResetPasswordController extends Controller
      * @return JsonResponse
      */
 
-
+    
     public function sendMail(Request $request)
     {
         $user = User::where('email', $request->email)->firstOrFail();
@@ -31,13 +31,8 @@ class ResetPasswordController extends Controller
             'token' => Str::random(60),
         ]);
 
-        $url = ResetPassword::createUrlUsing(function ($user, string $token) {
-            return 'http://localhost:3000/reset-password/'.$token;
-        });
-
-       
         if ($passwordReset) {
-            $user->notify(new ResetPasswordRequest($url));
+            $user->notify(new ResetPasswordRequest($passwordReset->token));
         }
   
         return response()->json([

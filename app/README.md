@@ -79,3 +79,4 @@ php artisan migrate:refresh
 php artisan passport:install
 php artisan config:cache
 php artisan cache:clear
+php artisan route:clear

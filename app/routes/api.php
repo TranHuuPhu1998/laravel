@@ -5,6 +5,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TaskController;
+
+use Illuminate\Support\Facades\Password;
+use Illuminate\Auth\Events\PasswordReset;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -31,8 +36,7 @@ Route::group([
 });
 // route question 
 
-    Route::post('reset-password', 'ResetPasswordController@sendMail');
-    Route::put('reset-password/{token}', 'ResetPasswordController@reset');
+    // Route::post('reset-password', 'ResetPasswordController@sendMail');
    
     Route::get('/questions' ,[QuestionController::class , 'index']);
     Route::get('/ques-ans' ,[QuestionController::class , 'storeQuestionsAnswer']);
@@ -48,3 +52,6 @@ Route::group([
     Route::delete('/users/delete/{id}' , [AuthController::class , 'deleteUser']);
     Route::post('/users/create' , [AuthController::class , 'createUser']);
     Route::put('/users/update/{id}' , [AuthController::class , 'updateUser']);
+
+    Route::post('forgot-password', 'ResetPasswordController@forgot');
+    Route::post('reset-password', 'ResetPasswordController@reset');

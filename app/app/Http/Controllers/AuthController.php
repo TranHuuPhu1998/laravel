@@ -25,7 +25,6 @@ class AuthController extends Controller
             'password' => 'required|string|confirmed',
             'permission' => 'required|integer',
             'position' => 'required|integer',
-            'status' => 'string',
         ]);
  
         if ($validator->fails()) {
@@ -41,7 +40,6 @@ class AuthController extends Controller
             'email' => $request->email,
             'position' => $request->position,
             'permission' => $request->permission,
-            'status' => $request->status,
             'password' => bcrypt($request->password)
         ]);
  
@@ -89,6 +87,7 @@ class AuthController extends Controller
             
         return response()->json([
             'status' => 'success',
+            'user' => $user,
             'access_token' => $tokenResult->accessToken,
             'token_type' => 'Bearer',
             'expires_at' => Carbon::parse(

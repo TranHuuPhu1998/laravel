@@ -20,7 +20,8 @@ class CreateUsersTable extends Migration
             $table->integer('permission');
             $table->integer('position');
             $table->string('password');
-            $table->string('status');
+            $table->string('status')->default('');
+            $table->boolean('isAdmin')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });

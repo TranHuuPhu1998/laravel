@@ -10,7 +10,6 @@ use App\Laravue\JsonResponse;
 
 use App\Http\Resources\UserResource;
 use Illuminate\Http\Response;
-
 use Carbon\Carbon;
 use App\User;
 use Validator;
@@ -122,17 +121,20 @@ class AuthController extends Controller
     }
 
     public function updateUser(Request $request , $id){
+
         $user = User::find($id);
 
-        $user->name = $request->name;
+        $user->name = $request->name;   
         $user->email = $request->email;
         $user->permission = $request->permission;
         $user->position = $request->position;
         $user->status = $request->status;
+        $user->password = bcrypt($request->password);
+        $user->isAdmin = $request->isAdmin; 
 
         $result = $user->save();
 
-        return new User($user);
+        return  $user;
     }
 
     public function createUser(Request $request) {
@@ -140,7 +142,7 @@ class AuthController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|string',
             'email' => 'required|string|email|unique:users',
-            'password' => 'required|string|confirmed',
+            'password' => 'required|string',
             'permission' => 'required|integer',
             'position' => 'required|integer',
             'status' => 'string',
@@ -167,6 +169,7 @@ class AuthController extends Controller
         
         return response()->json([
             'status' => 'success',
+            'user' => $user,
         ]);
     }
 }

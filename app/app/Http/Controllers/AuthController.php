@@ -11,7 +11,7 @@ use App\Laravue\JsonResponse;
 use App\Http\Resources\UserResource;
 use Illuminate\Http\Response;
 use Carbon\Carbon;
-use App\User;
+use App\Models\User;
 use Validator;
  
 class AuthController extends Controller
@@ -33,7 +33,7 @@ class AuthController extends Controller
                 'errors' => $validator->errors()->toArray(),
             ]);
         }
- 
+        
         $user = new User([
             'name' => $request->name,
             'email' => $request->email,
@@ -108,68 +108,4 @@ class AuthController extends Controller
         return response()->json($request->user());
     }
 
-    public function getUsers(Request $request){
-        return new UserResource(User::all());
-    }
-
-    public function deleteUser($id) {
-        $user = User::find($id);
-
-        $user->delete();
-
-        return response()->json('successfully deleted');
-    }
-
-    public function updateUser(Request $request , $id){
-
-        $user = User::find($id);
-
-        $user->name = $request->name;   
-        $user->email = $request->email;
-        $user->permission = $request->permission;
-        $user->position = $request->position;
-        $user->status = $request->status;
-        $user->password = bcrypt($request->password);
-        $user->isAdmin = $request->isAdmin; 
-
-        $result = $user->save();
-
-        return  $user;
-    }
-
-    public function createUser(Request $request) {
-
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|string',
-            'email' => 'required|string|email|unique:users',
-            'password' => 'required|string',
-            'permission' => 'required|integer',
-            'position' => 'required|integer',
-            'status' => 'string',
-        ]);
- 
-        if ($validator->fails()) {
-            return response()->json([
-                'status' => 'fails',
-                'message' => $validator->errors()->first(),
-                'errors' => $validator->errors()->toArray(),
-            ]);
-        }
- 
-        $user = new User([
-            'name' => $request->name,
-            'email' => $request->email,
-            'position' => $request->position,
-            'permission' => $request->permission,
-            'status' => $request->status,
-            'password' => bcrypt($request->password)
-        ]);
- 
-        $user->save();
-        
-        return response()->json([
-            'status' => 'success',
-            'user' => $user,
-        ]);
-    }
 }

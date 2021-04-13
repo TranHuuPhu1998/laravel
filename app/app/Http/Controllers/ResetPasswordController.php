@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use Illuminate\Support\Str;
-// use app\Models\User;
 use Illuminate\Http\Request;
 use App\Models\PasswordReset;
 use App\Notifications\ResetPasswordRequest;
@@ -14,7 +13,7 @@ use App\Http\Requests\ResetRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 
-use App\User;
+use App\Models\User;
 
 class ResetPasswordController extends Controller
 {
@@ -66,6 +65,5 @@ class ResetPasswordController extends Controller
             'message' => 'We have e-mailed your password reset link!'
         ]);
     }
-
 
 }

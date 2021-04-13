@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Resources\QuestionResource;
-use App\Questions;
-// use App\Answer;
+use App\Models\Questions;
 
 class QuestionController extends Controller
 {
@@ -28,21 +27,12 @@ class QuestionController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
     public function store(Request $request)
     {
         
@@ -74,22 +64,12 @@ class QuestionController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function edit(Request $request)
     {
         $question = Questions::find($request->id);
@@ -103,6 +83,7 @@ class QuestionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function update(Request $request, $id)
     {
         $question = Questions::find($id);
@@ -114,6 +95,7 @@ class QuestionController extends Controller
 
         return new QuestionResource($question);
     }
+    
     public function delete($id)
     {
         $question = Questions::find($id);
@@ -122,14 +104,5 @@ class QuestionController extends Controller
 
         return response()->json('successfully deleted');
     }
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+
 }

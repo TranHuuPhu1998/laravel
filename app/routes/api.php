@@ -2,14 +2,17 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
+// use Illuminate\Auth\Events\PasswordReset;
+
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\TaskItemController;
 
-use Illuminate\Support\Facades\Password;
-use Illuminate\Auth\Events\PasswordReset;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -20,38 +23,61 @@ use Illuminate\Support\Str;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
+// route auth
 Route::group([
     'prefix' => 'auth'
 ], function () {
     Route::post('login', 'AuthController@login');
     Route::post('signup', 'AuthController@signup');
-   
+    Route::post('forgot-password', 'ResetPasswordController@forgot');
+    Route::post('reset-password', 'ResetPasswordController@reset');
+    
     Route::group([
       'middleware' => 'auth:api'
     ], function() {
-        Route::delete('logout', 'AuthController@logout');
-        Route::get('user', 'AuthController@user');
+        Route::delete('/logout', 'AuthController@logout');
+        Route::get('/user', 'AuthController@user');
     });
 });
-// route question 
 
-    // Route::post('reset-password', 'ResetPasswordController@sendMail');
-   
-    Route::get('/questions' ,[QuestionController::class , 'index']);
-    Route::get('/ques-ans' ,[QuestionController::class , 'storeQuestionsAnswer']);
-    Route::get('/questions/{id}', [QuestionController::class , 'edit']);
-    Route::post('/questions/create' ,[QuestionController::class , 'store']);
-    Route::delete('/questions/delete/{id}' ,[QuestionController::class , 'delete']);
-    Route::put('/questions/update/{id}' ,[QuestionController::class , 'update']);
+// route questions 
+Route::group([ 
+    'prefix' => 'questions'
+], function(){
+    Route::get('/' ,[QuestionController::class , 'index']);
+    Route::get('/{id}', [QuestionController::class , 'edit']);
+    Route::post('/create' ,[QuestionController::class , 'store']);
+    Route::delete('/delete/{id}' ,[QuestionController::class , 'delete']);
+    Route::put('/update/{id}' ,[QuestionController::class , 'update']);
+});
 
-// route taks
-    Route::get('tasks' , [TaskController::class , 'index']);
+// route tasks
+Route::group([ 
+    'prefix' => 'tasks'
+], function(){
+    Route::get('/' , [TaskController::class , 'index']);
+    Route::put('/update/{id}' , [TaskController::class , 'updatetask']);
+    Route::post('/createtask' , [TaskController::class , 'create']);
+});
+
+// route tasksitem
+Route::group([ 
+    'prefix' => 'taskitem'
+], function(){
+    Route::get('/', [TaskItemController::class, 'storeTaskTtem']);
+    Route::delete('/delete/{id}' , [TaskItemController::class,'update']);
+    Route::put('/update/{id}' , [TaskItemController::class, 'delete']);
+    Route::post('/create/{id}' , [TaskItemController::class , 'createTaskItem']);
+});
+
 // route users
-    Route::get('/users' , [AuthController::class,'getUsers']);
-    Route::delete('/users/delete/{id}' , [AuthController::class , 'deleteUser']);
-    Route::post('/users/create' , [AuthController::class , 'createUser']);
-    Route::put('/users/update/{id}' , [AuthController::class , 'updateUser']);
+Route::group([
+    'prefix' => 'users'
+], function(){
+    Route::get('/' , [UserController::class,'getUsers']);
+    Route::delete('/delete/{id}' , [UserController::class , 'deleteUser']);
+    Route::post('/create' , [UserController::class , 'createUser']);
+    Route::put('/update/{id}' , [UserController::class , 'updateUser']);
+});
 
-    Route::post('forgot-password', 'ResetPasswordController@forgot');
-    Route::post('reset-password', 'ResetPasswordController@reset');
+

@@ -1,9 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use App\Http\Resources\TasksResource;
-use App\ModelsTask;
+use App\Models\ModelsTask;
+
+use Validator;
 
 class TaskController extends Controller
 {
@@ -22,12 +25,12 @@ class TaskController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create(Request $request){
-
+ 
         $this->validate($request, [
             'title' => 'required|string',
             'description' => 'required|string', 
             'content' => 'required|string',
-            'status' => 'required|number',
+            'status' => 'required|integer',
         ], [
             'title.required' => 'Entering the question is required.',
             'description.required' => 'Entering the description is required.',
@@ -36,7 +39,7 @@ class TaskController extends Controller
         ]); 
 
         $tasks = new ModelsTask([
-            'title' => $request>get('title'),
+            'title' => $request->get('title'),
             'description' => $request->get('description'),
             'content' => $request->get('content'),
             'status' => $request->get('status'),
@@ -52,9 +55,18 @@ class TaskController extends Controller
         }
     }
 
-    public function edit(Request $request){
+    public function edit(Request $request,$id){
         $tasks = ModelsTask::find($request->id);
         return response()->json($tasks);
     }
 
+    public function updatetask(Request $request , $id) {
+        $tasks = ModelsTask::find($id);
+
+        $tasks->taskitem = $request->taskitem;
+
+        $result = $tasks->save();
+
+        return new TasksResource($tasks);
+    }
 }

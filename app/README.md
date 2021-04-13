@@ -82,3 +82,6 @@ php artisan cache:clear
 php artisan route:clear
 
 php artisan key:generate
+factory(App\ModelsTask::class, 60)->create()
+
+tinker

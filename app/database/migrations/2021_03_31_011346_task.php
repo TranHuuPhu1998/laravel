@@ -41,6 +41,7 @@ class Task extends Migration
 
         Schema::create('ProjectManager', function (Blueprint $table) {
             $table->increments('id', true)->unsigned();
+            $table->integer('project_id')->unsigned();
             $table->string('project_client')->default('');
             $table->string('project_name')->default('');
             $table->string('project_type')->default('');
@@ -64,9 +65,8 @@ class Task extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ProjectManager');
         Schema::dropIfExists('taskItem');
         Schema::dropIfExists('task');
-        
+        Schema::dropIfExists('ProjectManager');
     }
 }

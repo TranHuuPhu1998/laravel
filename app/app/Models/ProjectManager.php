@@ -12,6 +12,7 @@ class ProjectManager extends Model
         'project_type',
         'project_client',
         'project_status',
+        'project_id',
         'date_start',
         'date_end'
     ];

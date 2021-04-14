@@ -13,7 +13,7 @@ use App\Http\Requests\ResetRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 
-use App\Models\User;
+use App\User;
 
 class ResetPasswordController extends Controller
 {

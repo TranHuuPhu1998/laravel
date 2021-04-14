@@ -38,9 +38,24 @@ class Task extends Migration
         Schema::connection('mysql')->table('taskItem', function (Blueprint $table) {
             $table->foreign('taskid')->references('id')->on('task');
         });
+
+        Schema::create('ProjectManager', function (Blueprint $table) {
+            $table->increments('id', true)->unsigned();
+            $table->string('project_client')->default('');
+            $table->string('project_name')->default('');
+            $table->string('project_type')->default('');
+            $table->string('project_status')->default('');
+            $table->timestamp('date_start')->useCurrent();
+            $table->timestamp('date_end')->useCurrent();
+            $table->timestamps();
+           
+            $table->engine = 'InnoDB';
+        });
+
+        Schema::connection('mysql')->table('users' , function(Blueprint $table){
+            $table->foreign('project_id')->references('id')->on('ProjectManager');
+        });
     }
-
-
 
     /**
      * Reverse the migrations.
@@ -49,7 +64,9 @@ class Task extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('ProjectManager');
         Schema::dropIfExists('taskItem');
         Schema::dropIfExists('task');
+        
     }
 }

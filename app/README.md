@@ -82,6 +82,13 @@ php artisan cache:clear
 php artisan route:clear
 
 php artisan key:generate
-factory(App\ModelsTask::class, 60)->create()
+factory(App\Models\ModelsTask::class, 60)->create()
+factory(App\Models\ProjectManager::class, 60)->create()
 
 tinker
+
+php artisan config:cache 
+php artisan config:clear 
+composer dump-autoload -o
+
+php artisan make:migration answer --create=answer

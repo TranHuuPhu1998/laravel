@@ -12,7 +12,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\TaskItemController;
-
+use App\Http\Controllers\ProjectManagerController;
+use App\Http\Controllers\ResetPasswordController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -80,4 +81,12 @@ Route::group([
     Route::put('/update/{id}' , [UserController::class , 'updateUser']);
 });
 
+// route manager 
+Route::group([
+    'prefix' => 'project'
+],function(){
+    Route::get('/' , [ProjectManagerController::class , 'index']);
+    Route::post('/create' , [ProjectManagerController::class , 'createProject']);
+    Route::put('/update/{id}' , [ProjectManagerController::class , 'updateProject']);
+});
 

@@ -11,7 +11,7 @@ use App\Laravue\JsonResponse;
 use App\Http\Resources\UserResource;
 use Illuminate\Http\Response;
 use Carbon\Carbon;
-use App\Models\User;
+use App\User;
 use Validator;
  
 class AuthController extends Controller

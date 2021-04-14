@@ -3,8 +3,9 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
 use App\User;
-use App\ModelsTask;
-use App\TaskItem;
+use App\Models\ModelsTask;
+use App\Models\TaskItem;
+use App\Models\ProjectManager;
 use Faker\Generator as Faker;
 use Illuminate\Support\Str;
 
@@ -18,10 +19,11 @@ use Illuminate\Support\Str;
 | model instances for testing / seeding your application's database.
 |
 */
-
-$factory->define(User::class, function (Faker $faker) {
+// factory(App\User::class, 60)->create()
+$factory->define(App\User::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
+        'project_id' => factory(App\Models\ProjectManager::class),
         'email' => $faker->unique()->safeEmail,
         'permission' => mt_rand(1, 100),
         'position' => mt_rand(1111, 999999),
@@ -33,8 +35,8 @@ $factory->define(User::class, function (Faker $faker) {
         'created_at' => now()
     ];
 });
-
-$factory->define(ModelsTask::class, function (Faker $faker) {
+// factory(App\Models\ModelsTask::class, 60)->create()
+$factory->define(App\Models\ModelsTask::class, function (Faker $faker) {
     return [
         'title' => $faker->title,
         'description' => $faker->name,
@@ -44,6 +46,20 @@ $factory->define(ModelsTask::class, function (Faker $faker) {
         'created_at' => now()
     ];
 });
+// factory(App\Models\ProjectManager::class, 60)->create()
+$factory->define(App\Models\ProjectManager::class, function (Faker $faker) {
+    return [
+        'project_client' => $faker->name,
+        'project_name' => $faker->name,
+        'project_type' => $faker->name,
+        'project_status' =>$faker->name,
+        'date_start' => now(),
+        'date_end' => now(),
+        'updated_at' => now(),
+        'created_at' => now()
+    ];
+});
+
 
 
 

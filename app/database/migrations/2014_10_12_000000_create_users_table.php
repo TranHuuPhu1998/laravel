@@ -14,8 +14,9 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id', true)->unsigned();
             $table->string('name');
+            $table->integer('project_id')->unsigned();
             $table->string('email',191)->unique();
             $table->integer('permission');
             $table->integer('position');
@@ -24,7 +25,11 @@ class CreateUsersTable extends Migration
             $table->boolean('isAdmin')->default(false);
             $table->rememberToken();
             $table->timestamps();
+
+            $table->engine = 'InnoDB';
         });
+
+
     }
 
     /**

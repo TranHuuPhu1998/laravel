@@ -35,7 +35,6 @@ class QuestionController extends Controller
 
     public function store(Request $request)
     {
-        
         $this->validate($request,[
             'question' => 'required|string',
             'category' => 'required|string',
@@ -43,8 +42,8 @@ class QuestionController extends Controller
             'question.required'=> 'Entering the question is required.',
             'category.required'=> 'Entering the category is required.',
 
-            'question.integer'=> 'Entering the question is string.',
-            'category.integer'=> 'Entering the category is string.',
+            'question.string'=> 'Entering the question is string.',
+            'category.string'=> 'Entering the category is string.',
         ]);
         $question = new Questions([
             "question"=> $request->get('question'),
@@ -60,7 +59,6 @@ class QuestionController extends Controller
         else {
             return response()->json('error added');
         }
-
     }
 
     /**

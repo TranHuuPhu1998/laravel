@@ -59,40 +59,47 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+// create migrations
+
 $ php artisan make:controller Country/CountryController
+
+$ php artisan make:migration answer --create=answer
 
 $ php artisan make:controller Country/QuestionController --resource
 
 $ php artisan make:model Models/admin
 
-$ php artisan serve
-
-$ php artisan migrate
-
 $ php artisan make:resource QuestionResource
 
-phu-th@if-vietnam.com
-wwwwwwwwwwwwwwwwwww
+// tạo key định danh riêng cho project
+php artisan key:generate
 
-php artisan migrate:refresh
-
+// tạo key auth
+php artisan passport:client --personal
 php artisan passport:install
+
+// clear 
 php artisan config:cache
 php artisan cache:clear
 php artisan route:clear
 
-php artisan key:generate
-
-factory(App\Models\ModelsTask::class, 60)->create()
-factory(App\Models\ProjectManager::class, 60)->create()
-factory(App\User::class, 60)->create()
-
-php artisan tinker
-
-php artisan config:cache 
-php artisan config:clear 
+// auto load file redirec
 composer dump-autoload -o
 
-php artisan make:migration answer --create=answer
+// automatic create database 
+php artisan tinker
 
-php artisan passport:client --personal
+factory(App\Models\ModelsTask::class, 20)->create()
+factory(App\Models\ProjectManager::class, 20)->create()
+factory(App\User::class, 20)->create()
+factory(App\Models\TaskItem::class, 20)->create()
+
+// refresh database
+php artisan migrate:refresh
+
+// create database 
+php artisan migrate
+
+// start
+php artisan serve

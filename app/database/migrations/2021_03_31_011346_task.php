@@ -54,7 +54,7 @@ class Task extends Migration
         });
 
         Schema::connection('mysql')->table('users' , function(Blueprint $table){
-            $table->foreign('project_id')->references('id')->on('ProjectManager');
+            $table->foreign('users_id')->references('id')->on('ProjectManager');
         });
     }
 

@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use App\Http\Resources\ProjectManagerResource;
 use App\Models\ProjectManager;
+use App\User;
 
 class ProjectManagerController extends Controller
 {
@@ -51,4 +53,23 @@ class ProjectManagerController extends Controller
         }
     }     
 
+    public function updateProject(Request $request, $id){
+        $project = ProjectManager::find($id);
+        return new ProjectManagerResource($project);
+    }
+                                                                        
+    public function deleteProject($id){
+
+        $project = ProjectManager::find($id);
+        $users = User::where('users_id', $id)->get();
+
+        foreach ($users as $user) {
+            $user = User::find($user->id);
+            $user->users_id = null;
+            $user->save();
+        }
+
+        $project->delete();
+        return response()->json('successfully deleted');
+    }   
 }

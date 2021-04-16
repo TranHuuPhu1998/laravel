@@ -88,5 +88,6 @@ Route::group([
     Route::get('/' , [ProjectManagerController::class , 'index']);
     Route::post('/create' , [ProjectManagerController::class , 'createProject']);
     Route::put('/update/{id}' , [ProjectManagerController::class , 'updateProject']);
+    Route::delete('/delete/{id}' , [ProjectManagerController::class , 'deleteProject']);
 });
 

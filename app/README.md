@@ -91,6 +91,7 @@ composer dump-autoload -o
 php artisan tinker
 
 factory(App\Models\ModelsTask::class, 20)->create()
+
 factory(App\Models\ProjectManager::class, 20)->create()
 factory(App\User::class, 20)->create()
 factory(App\Models\TaskItem::class, 20)->create()

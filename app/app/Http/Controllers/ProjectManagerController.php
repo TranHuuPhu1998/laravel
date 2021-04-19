@@ -41,8 +41,17 @@ class ProjectManagerController extends Controller
             'project_status' => $request->get('project_status'),
             'date_start' => $request->get('date_start'),
             'date_end' => $request->get('date_end'),
+            
         ]);
+            
 
+       
+        foreach ($members->getCollection() as $member) {
+           // $user = User::find($member->id);
+            // $user->users_id = $project->id;
+            echo $member;
+            // $user->save();
+        }
         $result = $project->save();
 
         if($result){
@@ -62,14 +71,14 @@ class ProjectManagerController extends Controller
 
         $project = ProjectManager::find($id);
         $users = User::where('users_id', $id)->get();
-
+        echo $users;
         foreach ($users as $user) {
             $user = User::find($user->id);
             $user->users_id = null;
             $user->save();
         }
 
-        $project->delete();
+        // $project->delete();
         return response()->json('successfully deleted');
     }   
 }

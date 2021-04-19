@@ -34,24 +34,19 @@ class ProjectManagerController extends Controller
             'date_end.date' => 'Entering the date end is date',
         ]);
         
-        $project= new ProjectManager([
+        $project = new ProjectManager([
+            'project_id' => $request->get('project_id'),
             'project_client' => $request->get('project_client'),
             'project_name' => $request->get('project_name'),
             'project_type' => $request->get('project_type'),
             'project_status' => $request->get('project_status'),
             'date_start' => $request->get('date_start'),
             'date_end' => $request->get('date_end'),
-            
-        ]);
-            
+            'members' => $request->get('members')
+        ]); 
+        
+        echo $project;
 
-       
-        foreach ($members->getCollection() as $member) {
-           // $user = User::find($member->id);
-            // $user->users_id = $project->id;
-            echo $member;
-            // $user->save();
-        }
         $result = $project->save();
 
         if($result){

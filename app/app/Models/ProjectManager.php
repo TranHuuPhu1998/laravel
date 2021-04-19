@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class ProjectManager extends Model
 {
     protected $table = "ProjectManager";
+    protected $casts = [
+        'members' => 'array'
+    ];
     protected $fillable = [
         'project_name',
         'project_type',
@@ -14,6 +17,8 @@ class ProjectManager extends Model
         'project_status',
         'project_id',
         'date_start',
-        'date_end'
+        'date_end',
+        'members'
     ];
+   
 }

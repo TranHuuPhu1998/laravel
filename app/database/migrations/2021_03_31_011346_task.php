@@ -45,6 +45,7 @@ class Task extends Migration
             $table->string('project_client')->default('');
             $table->string('project_name')->default('');
             $table->string('project_type')->default('');
+            $table->json('members')->nullable();
             $table->string('project_status')->default('');
             $table->timestamp('date_start')->useCurrent();
             $table->timestamp('date_end')->useCurrent();

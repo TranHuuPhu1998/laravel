@@ -30,7 +30,7 @@ $factory->define(App\User::class, function (Faker $faker) {
         'email' => $faker->unique()->safeEmail,
         'permission' => mt_rand(1, 100),
         'position' => mt_rand(1111, 999999),
-        'status' => mt_rand(0, 2),
+        'status' => $faker->randomElement(['active', 'pending', 'success']),
         'isAdmin' =>  0,
         'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
         'remember_token' => Str::random(10),
@@ -61,7 +61,18 @@ $factory->define(App\Models\ProjectManager::class, function (Faker $faker) {
         'date_start' => now(),
         'date_end' => now(),
         'updated_at' => now(),
-        'created_at' => now()
+        'created_at' => now(),
+        'members' =>  [
+            [
+                'id' => $faker->randomNumber(),
+                'name' => $faker->name,
+                'user_id' => $faker->randomNumber(),
+                'email' => $faker->email,
+                'permission' => $faker->randomNumber(),
+                'position' => $faker->randomNumber(),
+                'status' => $faker->randomElement(['active', 'pending', 'success']),
+            ]
+        ]
     ];
 });
 // factory(App\Models\TaskItem::class, 20)->create()

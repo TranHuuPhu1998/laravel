@@ -45,8 +45,6 @@ class ProjectManagerController extends Controller
             'members' => $request->get('members')
         ]); 
         
-        echo $project;
-
         $result = $project->save();
 
         if($result){
@@ -59,14 +57,28 @@ class ProjectManagerController extends Controller
 
     public function updateProject(Request $request, $id){
         $project = ProjectManager::find($id);
-        return new ProjectManagerResource($project);
+
+        $project->project_client = $request->project_client;
+        $project->project_name = $request->project_name;
+        $project->project_type = $request->project_type;
+        $project->project_status = $request->project_status;
+        $project->date_start = $request->date_start;
+        $project->date_end = $request->date_end;
+        $project->members = $request->members;
+
+        $result = $project->save();
+        if($result){
+            return new ProjectManagerResource($project);
+        }else {
+            return response()->json('error added');
+        }
     }
                                                                         
     public function deleteProject($id){
 
         $project = ProjectManager::find($id);
         $users = User::where('users_id', $id)->get();
-        echo $users;
+
         foreach ($users as $user) {
             $user = User::find($user->id);
             $user->users_id = null;

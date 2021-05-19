@@ -29,6 +29,7 @@ class Task extends Migration
             $table->increments('id', true)->unsigned();
             $table->integer('taskid')->unsigned();
             $table->string('taskname')->default('');
+            $table->string('status')->default('open');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
             

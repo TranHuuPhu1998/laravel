@@ -66,8 +66,8 @@ Route::group([
     'prefix' => 'taskitem'
 ], function(){
     Route::get('/', [TaskItemController::class, 'storeTaskTtem']);
-    Route::delete('/delete/{id}' , [TaskItemController::class,'update']);
-    Route::put('/update/{id}' , [TaskItemController::class, 'delete']);
+    Route::delete('/delete/{id}' , [TaskItemController::class,'delete']);
+    Route::put('/update/{id}' , [TaskItemController::class, 'update']);
     Route::post('/create/{id}' , [TaskItemController::class , 'createTaskItem']);
 });
 

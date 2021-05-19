@@ -27,6 +27,7 @@ class TaskItemController extends Controller
         $taskItem = new TaskItem([
             'taskid' =>  $id,
             'taskname' => $request->get('taskname'),
+            'status' => $request->get('status'),
         ]);
 
         $result = $taskItem->save();
@@ -41,8 +42,9 @@ class TaskItemController extends Controller
     public function update(Request $request, $id){
         $taskItem = TaskItem::find($id);
 
-        $taskItem->taskname = $request->taskitem;
-        $taskItem->taskid = $id;
+        $taskItem->taskname = $request->taskname;
+        $taskItem->status = $request->status;
+        $taskItem->taskid = $request->taskid;
 
         $result = $taskItem->save();
         return new TaskItemResource($taskItem);

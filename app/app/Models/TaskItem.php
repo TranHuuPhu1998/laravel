@@ -9,6 +9,7 @@ class TaskItem extends Model
     protected $table = "taskitem";
     protected $fillable = [
         'taskid',
-        'taskname'
+        'taskname',
+        'status'
     ];
 }

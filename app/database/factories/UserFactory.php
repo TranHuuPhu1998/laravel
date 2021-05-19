@@ -19,6 +19,7 @@ use Illuminate\Support\Str;
 | model instances for testing / seeding your application's database.
 |
 */
+//php artisan tinker
 // factory(App\User::class, 20)->create()
 
 $factory->define(App\User::class, function (Faker $faker) {
@@ -82,6 +83,7 @@ $factory->define(App\Models\TaskItem::class, function (Faker $faker) {
             return factory(App\Models\ModelsTask::class)->create()->id;
         },
         'taskname' => $faker->name,
+        'status' => $faker->randomElement(['open', 'inprocess', 'success']),
         'created_at' => now(),
         'updated_at' => now()
     ];

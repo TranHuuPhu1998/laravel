@@ -5,7 +5,6 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
-// use Illuminate\Auth\Events\PasswordReset;
 
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\AuthController;
@@ -14,6 +13,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\TaskItemController;
 use App\Http\Controllers\ProjectManagerController;
 use App\Http\Controllers\ResetPasswordController;
+use App\Http\Controllers\FileController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -91,3 +91,8 @@ Route::group([
     Route::delete('/delete/{id}' , [ProjectManagerController::class , 'deleteProject']);
 });
 
+Route::group([
+    'prefix' => 'upload'
+] , function(){
+    Route::post('/', [FileController::class , 'uploadImage']);
+});

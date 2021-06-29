@@ -23,11 +23,19 @@ class TaskItemController extends Controller
             'taskname.required' => 'Entering the taskname is required.',
             'taskname.string' => 'Entering the taskname is string' 
         ]);
-        
+        $path = null;
+        if($request->hasFile('images')){
+            $file = $request->file('images');
+            $filename = $file->getClientOriginalName();
+            $finalName = date('His') . $filename;
+            $path = $request->file('images')->store('images'); 
+        }
+    
         $taskItem = new TaskItem([
             'taskid' =>  $id,
             'taskname' => $request->get('taskname'),
             'status' => $request->get('status'),
+            'img_path' => $path
         ]);
 
         $result = $taskItem->save();

@@ -21,7 +21,6 @@ use Illuminate\Support\Str;
 */
 //php artisan tinker
 // factory(App\User::class, 20)->create()
-
 $factory->define(App\User::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
@@ -84,6 +83,7 @@ $factory->define(App\Models\TaskItem::class, function (Faker $faker) {
         },
         'taskname' => $faker->name,
         'status' => $faker->randomElement(['open', 'inprocess', 'success']),
+        'img_path' => $faker->name,
         'created_at' => now(),
         'updated_at' => now()
     ];

@@ -30,6 +30,7 @@ class Task extends Migration
             $table->integer('taskid')->unsigned();
             $table->string('taskname')->default('');
             $table->string('status')->default('open');
+            $table->string('img_path')->default('');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
             

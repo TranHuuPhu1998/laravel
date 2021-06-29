@@ -10,6 +10,7 @@ class TaskItem extends Model
     protected $fillable = [
         'taskid',
         'taskname',
-        'status'
+        'status',
+        'img_path'
     ];
 }
